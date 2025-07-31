@@ -6,8 +6,6 @@ public class TestBot extends AbstractBot {
     Action play(
         int ownPosition,
         int[] playerMoney,
-        boolean isBigBlind,
-        boolean isSmallBlind,
         int moneyInPot,
         int[] currentBets,
         Card[] ownCards,
