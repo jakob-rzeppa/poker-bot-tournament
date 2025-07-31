@@ -1,7 +1,9 @@
 import actions.Action;
 
 abstract class AbstractBot {
-    abstract Action play(
+    public abstract String getName();
+
+    public abstract Action play(
         int ownPosition, 
         int[] playerMoney,
         int moneyInPot, 

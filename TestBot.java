@@ -3,7 +3,12 @@ import actions.Check;
 
 public class TestBot extends AbstractBot {
     @Override
-    Action play(
+    public String getName() {
+        return "TestBot";
+    }
+
+    @Override
+    public Action play(
         int ownPosition,
         int[] playerMoney,
         int moneyInPot,
