@@ -3,6 +3,6 @@ package actions;
 public class BetOrCheck extends Action {
     @Override
     public String toString() {
-        return "Bet";
+        return "Bet or Check";
     }
 }
