@@ -6,7 +6,7 @@ abstract class AbstractBot {
         int[] playerMoney, 
         int moneyInPot, 
         int[] currentBets, 
-        String[] ownCards, 
-        String[] currentCards
+        Card[] ownCards, 
+        Card[] currentCards
     );
 }
