@@ -1,5 +1,5 @@
 import actions.Action;
-import actions.Check;
+import actions.BetOrCheck;
 
 public class TestBot extends AbstractBot {
     @Override
@@ -16,6 +16,6 @@ public class TestBot extends AbstractBot {
         Card[] ownCards,
         Card[] uncoveredCards
     ) {
-        return new Check();
+        return new BetOrCheck();
     }
 }

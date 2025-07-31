@@ -1,6 +1,6 @@
 package actions;
 
-public class Bet extends Action {
+public class BetOrCheck extends Action {
     @Override
     public String toString() {
         return "Bet";
