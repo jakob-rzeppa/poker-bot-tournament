@@ -1,6 +1,7 @@
 import java.util.SortedMap;
 
 import actions.Action;
+import deck.Card;
 
 abstract class AbstractBot {
     public abstract String getName();

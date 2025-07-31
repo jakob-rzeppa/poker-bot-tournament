@@ -1,6 +1,7 @@
 import java.util.SortedMap;
 
 import actions.Action;
+import deck.Card;
 
 public class Player {
     private AbstractBot bot;
@@ -28,8 +29,8 @@ public class Player {
     }
 
     public void play(
-        Card[] uncoveredCards, 
-        int moneyInPot, 
+        Card[] uncoveredCards,
+        int moneyInPot,
         SortedMap<Integer, Integer> currentBets
     ) throws IllegalStateException {
         Action action = this.bot.selectAction(
