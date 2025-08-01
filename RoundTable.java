@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 import deck.Card;
 import deck.Deck;
@@ -8,17 +9,35 @@ import deck.Deck;
 public class RoundTable {
     private static final int MAX_UNCOVERED_CARDS = 5;
     private static final int[] ALLOWED_NUMBER_OF_CARDS_TO_UNCOVER_AT_ONCE = { 1, 3 };
+
+    private static final int SMALL_BLIND_AMOUNT = 10;
+    private static final int BIG_BLIND_AMOUNT = 20;
     
     private Deck deck;
     private SortedMap<Integer, Player> players;
+
+    private int currentSmallBlindPlayer;
+    private int currentBigBlindPlayer;
     
+    private int moneyInPot;
+    private SortedMap<Integer, Integer> currentBets;
 
     private List<Card> uncoveredCards;
 
-    public RoundTable(SortedMap<Integer, Player> players) {
+    public RoundTable(SortedMap<Integer, Player> players, int currentSmallBlindPlayer, int currentBigBlindPlayer) {
         this.deck = new Deck();
-        this.uncoveredCards = new ArrayList<>(5);
         this.players = players;
+
+        this.currentSmallBlindPlayer = currentSmallBlindPlayer;
+        this.currentBigBlindPlayer = currentBigBlindPlayer;
+
+        this.moneyInPot = 0;
+        this.currentBets = new TreeMap<>();
+        for (Integer playerId : players.keySet()) {
+            this.currentBets.put(playerId, 0);
+        }
+
+        this.uncoveredCards = new ArrayList<>(5);
     }
 
     public void dealCardsToPlayers() {
