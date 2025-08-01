@@ -1,6 +1,7 @@
 import java.util.SortedMap;
 
 import actions.Action;
+import actions.Fold;
 import deck.Card;
 
 public class Player {
@@ -40,23 +41,36 @@ public class Player {
         this.hand = new Card[2];
     }
 
-    public void play(
+    public void updateBankroll(int amount) throws IllegalStateException {
+        this.bankroll += amount;
+
+        if (this.bankroll < 0) {
+            throw new IllegalStateException("Bankroll cannot be negative");
+        }
+    }
+
+    public Action play(
         Card[] uncoveredCards,
         int moneyInPot,
         SortedMap<Integer, Integer> currentBets
     ) throws IllegalStateException {
-        Action action = this.bot.selectAction(
-            bankroll,
-            hand,
-            uncoveredCards,
-            moneyInPot,
-            currentBets
-        );
+        try {
+            Action action = this.bot.selectAction(
+                bankroll,
+                hand,
+                uncoveredCards,
+                moneyInPot,
+                currentBets
+            );
 
-        // handle the action
+            if (action == null) {
+                throw new IllegalStateException("Bot did not return a valid action");
+            }
 
-        if (bankroll < 0) {
-            throw new IllegalStateException("Bankroll cannot be negative");
+            return action;
+        } catch (Exception e) {
+            System.err.println(this.bot.getName() + ": Error during bot action selection: " + e.getMessage());
+            return new Fold();
         }
     }
 }
