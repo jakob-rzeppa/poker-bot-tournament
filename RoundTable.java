@@ -9,27 +9,18 @@ import deck.Deck;
 public class RoundTable {
     private static final int MAX_UNCOVERED_CARDS = 5;
     private static final int[] ALLOWED_NUMBER_OF_CARDS_TO_UNCOVER_AT_ONCE = { 1, 3 };
-
-    private static final int SMALL_BLIND_AMOUNT = 10;
-    private static final int BIG_BLIND_AMOUNT = 20;
     
     private Deck deck;
     private SortedMap<Integer, Player> players;
-
-    private int currentSmallBlindPlayer;
-    private int currentBigBlindPlayer;
     
     private int moneyInPot;
     private SortedMap<Integer, Integer> currentBets;
 
     private List<Card> uncoveredCards;
 
-    public RoundTable(SortedMap<Integer, Player> players, int currentSmallBlindPlayer, int currentBigBlindPlayer) {
+    public RoundTable(SortedMap<Integer, Player> players) {
         this.deck = new Deck();
         this.players = players;
-
-        this.currentSmallBlindPlayer = currentSmallBlindPlayer;
-        this.currentBigBlindPlayer = currentBigBlindPlayer;
 
         this.moneyInPot = 0;
         this.currentBets = new TreeMap<>();
@@ -58,6 +49,15 @@ public class RoundTable {
         if (uncoveredCards.size() > MAX_UNCOVERED_CARDS) {
             throw new IllegalStateException("Cannot uncover more than " + MAX_UNCOVERED_CARDS + " cards");
         }
+    }
+
+    public void changeBet(int playerId, int amount) throws IllegalStateException {
+        if (!currentBets.containsKey(playerId)) {
+            throw new IllegalStateException("Player with ID " + playerId + " does not exist");
+        }
+
+        int currentBet = currentBets.get(playerId);
+        currentBets.put(playerId, currentBet + amount);
     }
 
     public void resetTable() {
