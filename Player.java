@@ -14,6 +14,7 @@ public class Player {
         this.bot = bot;
         this.name = bot.getName();
         this.bankroll = initialBankroll;
+        this.hand = new Card[2];
     }
 
     public AbstractBot getBot() {
@@ -26,6 +27,17 @@ public class Player {
 
     public int getBankroll() {
         return bankroll;
+    }
+
+    public void receiveCards(Card... cards) {
+        if (cards.length != 2) {
+            throw new IllegalArgumentException("Player must receive exactly two cards");
+        }
+        this.hand = cards;
+    }
+
+    public void clearHand() {
+        this.hand = new Card[2];
     }
 
     public void play(
