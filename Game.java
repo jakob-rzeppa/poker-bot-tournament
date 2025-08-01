@@ -7,27 +7,35 @@ public class Game {
     }
 
     private void playRound(int currentSmallBlindPlayer) {
-        RoundTable roundTable = new RoundTable();
+        RoundTable roundTable = new RoundTable(players);
 
         // Deal two cards to each player
+        roundTable.dealCardsToPlayers();
 
         // Collect blinds
 
         // make Bets starting with the big blind player and ending with the small blind player
 
-       // Deal first three uncovered cards
+        System.out.println("Deal first three uncovered cards");
+        roundTable.uncoverCards(3);
 
         // make Bets starting with the small blind player
 
-        // Deal fourth uncovered card
+        System.out.println("Deal fourth uncovered card");
+        roundTable.uncoverCards(1);
 
         // make Bets starting with the small blind player
 
-        // Deal fifth uncovered card
+        System.out.println("Deal fifth uncovered card");
+        roundTable.uncoverCards(1);
 
         // make Bets starting with the small blind player
+
+        // Collect the pot
 
         // Cleanup
+        System.out.println("Resetting the table for the next round");
+        roundTable.resetTable();
     }
 
     public void startGame() {

@@ -7,16 +7,18 @@ import deck.Deck;
 
 public class RoundTable {
     private Deck deck;
+    private SortedMap<Integer, Player> players;
 
     private List<Card> uncoveredCards;
 
-    public RoundTable() {
+    public RoundTable(SortedMap<Integer, Player> players) {
         this.deck = new Deck();
         this.uncoveredCards = new ArrayList<>(5);
+        this.players = players;
     }
 
-    public void dealCardsToPlayers(SortedMap<Integer, Player> players) {
-        for (Player player : players.values()) {
+    public void dealCardsToPlayers() {
+        for (Player player : this.players.values()) {
             player.receiveCards(deck.drawCard(), deck.drawCard());
         }
     }
@@ -35,9 +37,9 @@ public class RoundTable {
         }
     }
 
-    public void resetTable(SortedMap<Integer, Player> players) {
+    public void resetTable() {
         this.deck = new Deck();
         this.uncoveredCards.clear();
-        players.forEach((_, player) -> player.clearHand());
+        this.players.forEach((_, player) -> player.clearHand());
     }
 }
