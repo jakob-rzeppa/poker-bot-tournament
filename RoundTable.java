@@ -6,8 +6,12 @@ import deck.Card;
 import deck.Deck;
 
 public class RoundTable {
+    private static final int MAX_UNCOVERED_CARDS = 5;
+    private static final int[] ALLOWED_NUMBER_OF_CARDS_TO_UNCOVER_AT_ONCE = { 1, 3 };
+    
     private Deck deck;
     private SortedMap<Integer, Player> players;
+    
 
     private List<Card> uncoveredCards;
 
@@ -24,16 +28,16 @@ public class RoundTable {
     }
 
     public void uncoverCards(int numberOfCards) throws IllegalStateException {
-        if (numberOfCards != 1 && numberOfCards != 3) {
-            throw new IllegalArgumentException("Number of uncovered cards must be either 1 or 3");
+        if (!java.util.Arrays.stream(ALLOWED_NUMBER_OF_CARDS_TO_UNCOVER_AT_ONCE).anyMatch(n -> n == numberOfCards)) {
+            throw new IllegalArgumentException("Number of uncovered cards must be in " + java.util.Arrays.toString(ALLOWED_NUMBER_OF_CARDS_TO_UNCOVER_AT_ONCE));
         }
 
         for (int i = 0; i < numberOfCards; i++) {
             uncoveredCards.add(deck.drawCard());
         }
 
-        if (uncoveredCards.size() > 5) {
-            throw new IllegalStateException("Cannot uncover more than 5 cards");
+        if (uncoveredCards.size() > MAX_UNCOVERED_CARDS) {
+            throw new IllegalStateException("Cannot uncover more than " + MAX_UNCOVERED_CARDS + " cards");
         }
     }
 

@@ -5,6 +5,8 @@ import actions.Fold;
 import deck.Card;
 
 public class Player {
+    private static final int NUMBER_OF_CARDS_PER_PLAYER = 2;
+
     private AbstractBot bot;
     private String name;
     private int bankroll;
@@ -15,7 +17,7 @@ public class Player {
         this.bot = bot;
         this.name = bot.getName();
         this.bankroll = initialBankroll;
-        this.hand = new Card[2];
+        this.hand = new Card[NUMBER_OF_CARDS_PER_PLAYER];
     }
 
     public AbstractBot getBot() {
@@ -31,14 +33,14 @@ public class Player {
     }
 
     public void receiveCards(Card... cards) {
-        if (cards.length != 2) {
-            throw new IllegalArgumentException("Player must receive exactly two cards");
+        if (cards.length != NUMBER_OF_CARDS_PER_PLAYER) {
+            throw new IllegalArgumentException("Player must receive exactly " + NUMBER_OF_CARDS_PER_PLAYER + " cards");
         }
         this.hand = cards;
     }
 
     public void clearHand() {
-        this.hand = new Card[2];
+        this.hand = new Card[NUMBER_OF_CARDS_PER_PLAYER];
     }
 
     public void updateBankroll(int amount) throws IllegalStateException {
