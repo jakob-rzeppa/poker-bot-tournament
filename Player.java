@@ -32,6 +32,10 @@ public class Player {
         return bankroll;
     }
 
+    public Card[] getHand() {
+        return hand;
+    }
+
     public void receiveCards(Card... cards) {
         if (cards.length != NUMBER_OF_CARDS_PER_PLAYER) {
             throw new IllegalArgumentException("Player must receive exactly " + NUMBER_OF_CARDS_PER_PLAYER + " cards");

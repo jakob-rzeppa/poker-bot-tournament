@@ -65,4 +65,21 @@ public class RoundTable {
         this.uncoveredCards.clear();
         this.players.forEach((_, player) -> player.clearHand());
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Money in pot: ").append(moneyInPot).append("; ");
+        sb.append("Current bets: ").append(currentBets).append("; ");
+        sb.append("Uncovered cards: ").append(uncoveredCards).append("\n");
+        for (Integer playerId : players.keySet()) {
+            sb.append(players.get(playerId).getName())
+              .append(" - Bet: ").append(currentBets.get(playerId))
+              .append(" - Hand: ").append(java.util.Arrays.toString(players.get(playerId).getHand()))
+              .append("\n");
+        }
+        sb.append("\n");
+        return sb.toString();
+    
+    }
 }
